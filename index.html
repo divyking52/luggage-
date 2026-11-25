@@ -1043,6 +1043,179 @@
       background: linear-gradient(90deg, #0b1422, #1c314e, #0b1422);
       transform: rotateY(-90deg);
     }
+    .sc-face-top {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      height: 92px;
+      top: -46px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #0e1a2c 0%, #243b5c 50%, #0e1a2c 100%);
+      border-inline: 2px solid rgba(233, 217, 197, 0.2);
+      transform: rotateX(90deg);
+    }
+
+    /* ==========================================================================
+       07B. PERSISTENT SINGLE-ITEM SCROLL PARALLAX 3D SUITCASE STAGE
+       ========================================================================== */
+    .persistent-luggage-stage {
+      display: none;
+    }
+    .scroll-chapter-rail {
+      display: none;
+    }
+
+    @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+      body.single-item-scroll-active .persistent-luggage-stage {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 45;
+        pointer-events: none;
+        align-items: center;
+        justify-content: center;
+        perspective: 1450px;
+        overflow: hidden;
+      }
+      body.single-item-scroll-active #hero-stage .suitcase-floater,
+      body.single-item-scroll-active #explorer-suitcase {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .master-suitcase-track {
+        position: relative;
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+      }
+      .master-suitcase-rig {
+        position: relative;
+        width: 246px;
+        height: 356px;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+      .master-suitcase-rig .sc-handle {
+        transition: transform 0.45s var(--ease-out-expo);
+        transform: translateX(-50%) translateY(var(--handle-y, 0px)) translateZ(-6px);
+      }
+      .master-suitcase-rig .sc-face-back {
+        background:
+          repeating-linear-gradient(90deg, #15263E 0px, #15263E 14px, #0D192B 15px, #1E3554 18px, #15263E 22px);
+        border: 2px solid rgba(255, 120, 79, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 1.25rem;
+        text-align: center;
+      }
+      .master-xray-overlay {
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        background:
+          linear-gradient(90deg, rgba(255, 120, 79, 0.14) 1px, transparent 1px) 0 0 / 20px 20px,
+          linear-gradient(0deg, rgba(255, 120, 79, 0.14) 1px, transparent 1px) 0 0 / 20px 20px,
+          radial-gradient(circle at 50% 48%, rgba(16, 42, 74, 0.94), rgba(6, 14, 26, 0.97));
+        border: 2px dashed var(--tangerine);
+        opacity: var(--xray-alpha, 0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.65rem;
+        padding: 1.2rem;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--sand);
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .master-xray-overlay strong {
+        color: var(--tangerine);
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+      }
+      .master-xray-chip {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+        border: 2px solid var(--tangerine);
+        background: rgba(255, 120, 79, 0.18);
+        display: grid;
+        place-items: center;
+        color: var(--white);
+        font-weight: 800;
+        box-shadow: 0 0 24px rgba(255, 120, 79, 0.45);
+      }
+
+      /* Right-Edge Scroll Chapter Progress Rail (Slim Dot Bar + Hover Pill Tooltips) */
+      body.single-item-scroll-active .scroll-chapter-rail {
+        display: flex;
+        position: fixed;
+        right: 0.65rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 950;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 0.38rem;
+        border-radius: 999px;
+        background: rgba(11, 21, 36, 0.78);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(233, 217, 197, 0.22);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+      }
+      .chapter-dot-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.2rem;
+        color: rgba(233, 217, 197, 0.72);
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .chapter-dot-btn .c-lbl {
+        position: absolute;
+        right: calc(100% + 12px);
+        top: 50%;
+        transform: translateY(-50%) translateX(6px);
+        padding: 0.24rem 0.58rem;
+        border-radius: 999px;
+        background: rgba(11, 21, 36, 0.92);
+        border: 1px solid rgba(233, 217, 197, 0.22);
+        color: var(--offwhite);
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s var(--ease-out-expo);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
+      }
+      .chapter-dot-btn .c-pip {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(233, 217, 197, 0.38);
+        transition: transform 0.25s var(--ease-spring), background-color 0.25s ease, height 0.25s ease;
+      }
+      .chapter-dot-btn:hover .c-lbl,
+      .chapter-dot-btn:focus-visible .c-lbl {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+      .chapter-dot-btn.is-active .c-pip {
+        background: var(--tangerine);
+        height: 20px;
+        border-radius: 999px;
+        box-shadow: 0 0 10px rgba(255, 120, 79, 0.75);
+      }
+    }
 
     /* Corner Aluminum Bumpers & Crest */
     .sc-corners span {
@@ -1820,6 +1993,188 @@
       height: 64px;
       margin-bottom: 1rem;
     }
+    /* ==========================================================================
+       10B. CINEMATIC SCROLL-ZOOM PORTAL TRANSITION SECTION
+       ========================================================================== */
+    .zoom-portal-section {
+      position: relative;
+      height: 230vh;
+      background: var(--sand);
+      overflow: clip;
+      z-index: 3;
+      margin-bottom: -2px;
+    }
+    .zoom-portal-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .zoom-portal-flank {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 4.5vw, 4.5rem);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .zoom-portal-side-word {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.4vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      line-height: 1.05;
+      will-change: transform, opacity;
+    }
+    .zoom-portal-side-word small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tangerine-dark);
+      margin-bottom: 0.35rem;
+    }
+    .zoom-portal-frame {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      clip-path: inset(21vh 25vw 21vh 25vw round 36px);
+      will-change: clip-path;
+      z-index: 3;
+      overflow: hidden;
+      box-shadow: 0 36px 90px rgba(13, 25, 43, 0.28);
+    }
+    .zoom-portal-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.22);
+      will-change: transform;
+      filter: brightness(0.84) contrast(1.04);
+    }
+    .zoom-portal-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(13, 25, 43, 0.14) 0%, rgba(13, 25, 43, 0.62) 100%),
+        linear-gradient(180deg, rgba(13, 25, 43, 0.28) 0%, rgba(13, 25, 43, 0.12) 48%, rgba(20, 36, 58, 0.78) 100%);
+      pointer-events: none;
+    }
+    .zoom-portal-center-copy {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: var(--offwhite);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(28px) scale(0.95);
+      will-change: transform, opacity;
+    }
+    .zoom-portal-center-copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.4vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      max-width: 15ch;
+      margin: 0.75rem 0 0.85rem;
+      color: var(--offwhite);
+    }
+    .zoom-portal-center-copy p {
+      max-width: 46ch;
+      font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+      color: rgba(248, 247, 243, 0.86);
+    }
+    .zoom-portal-hud {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: rgba(11, 21, 36, 0.76);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(233, 217, 197, 0.24);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--sand);
+      pointer-events: none;
+    }
+    .zoom-portal-bar-track {
+      width: 96px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(233, 217, 197, 0.22);
+      overflow: hidden;
+    }
+    .zoom-portal-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--tangerine);
+      border-radius: 999px;
+    }
+    .zoom-portal-veil {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      background: var(--navy);
+      opacity: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+    @media (max-width: 900px) {
+      .zoom-portal-flank {
+        display: none;
+      }
+      .zoom-portal-frame {
+        clip-path: inset(16vh 8vw 16vh 8vw round 28px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .zoom-portal-section {
+        height: auto;
+        min-height: 72vh;
+      }
+      .zoom-portal-sticky {
+        position: relative;
+        height: 72vh;
+      }
+      .zoom-portal-frame {
+        clip-path: inset(0vh 0vw 0vh 0vw round 0px);
+      }
+      .zoom-portal-img {
+        transform: scale(1);
+      }
+      .zoom-portal-center-copy {
+        opacity: 1;
+        transform: none;
+      }
+      .zoom-portal-flank,
+      .zoom-portal-hud,
+      .zoom-portal-veil {
+        display: none;
+      }
+    }
+
     .timeline-steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -3584,6 +3939,73 @@
   <div class="custom-cursor-dot" id="cursor-dot" aria-hidden="true"></div>
   <div class="custom-cursor-ring" id="cursor-ring" aria-hidden="true"><span id="cursor-label">View</span></div>
 
+  <!-- Persistent Single-Item Scroll-Parallax 3D Suitcase Stage (Home Desktop) -->
+  <div class="persistent-luggage-stage" id="persistent-luggage-stage" aria-hidden="true">
+    <div class="master-suitcase-track" id="master-suitcase-track">
+      <div class="suitcase-floater">
+        <div class="master-suitcase-rig" id="master-suitcase-rig">
+          <div class="sc-handle">
+            <div class="sc-handle-grip"></div>
+          </div>
+          <div class="sc-face-front">
+            <div class="sc-corners"><span></span><span></span><span></span><span></span></div>
+            <div class="sc-crest">ROVÉ° CORE</div>
+            <div class="sc-sticker-belt">
+              <div>
+                <div style="opacity:0.7;" id="master-badge-kicker">PRIORITY BAG</div>
+                <strong id="master-badge-title">HND • GINZA</strong>
+              </div>
+              <div style="text-align:right;">
+                <div style="opacity:0.7;">STATUS</div>
+                <span style="color:var(--offwhite);" id="master-badge-status">SEALED</span>
+              </div>
+            </div>
+            <!-- Integrated X-Ray Blueprint Mode Overlay (Activates in Section 09) -->
+            <div class="master-xray-overlay" id="master-xray-overlay">
+              <div class="master-xray-chip">NFC</div>
+              <strong>CUSTODY X-RAY</strong>
+              <span>GPS BEACON • 20°C VAULT</span>
+              <span style="color:var(--tangerine);">SEAL #RV-8841 ARMED</span>
+            </div>
+          </div>
+          <div class="sc-face-back">
+            <div class="sc-back-telemetry">
+              <strong>GPS + NFC BEACON</strong>
+              5 LIVE CUSTODY SCANS<br/>SEAL #RV-8841 ARMED
+            </div>
+          </div>
+          <div class="sc-face-side">
+            <div class="sc-tsa-lock"></div>
+            <div class="sc-tsa-lock"></div>
+          </div>
+          <div class="sc-face-left"></div>
+          <div class="sc-face-top"></div>
+          <div class="sc-hanging-tag">
+            ROVÉ VIP<br/>#9042-LHR
+          </div>
+          <div class="sc-wheels">
+            <div class="sc-wheel"></div>
+            <div class="sc-wheel"></div>
+          </div>
+        </div>
+        <div class="sc-floor-shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right-Edge Scroll Chapter Progress Rail -->
+  <nav class="scroll-chapter-rail" id="scroll-chapter-rail" aria-label="Luggage Journey Chapters">
+    <button type="button" class="chapter-dot-btn is-active" data-chapter-target=".hero-section" data-chapter-idx="0"><span class="c-lbl">01 HERO</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#quick-booking-section" data-chapter-idx="1"><span class="c-lbl">02 BOOK</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#services-heading" data-chapter-idx="2"><span class="c-lbl">03 PROFILE</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#zoom-portal-section" data-chapter-idx="8"><span class="c-lbl">04 PORTAL</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#home-how-section" data-chapter-idx="3"><span class="c-lbl">05 ROUTE</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#explorer-section" data-chapter-idx="4"><span class="c-lbl">06 360° RIG</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#tracking-section" data-chapter-idx="5"><span class="c-lbl">08 GPS</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#why-section" data-chapter-idx="6"><span class="c-lbl">09 X-RAY</span><span class="c-pip"></span></button>
+    <button type="button" class="chapter-dot-btn" data-chapter-target="#final-cta-banner" data-chapter-idx="7"><span class="c-lbl">14 TAKEOFF</span><span class="c-pip"></span></button>
+  </nav>
+
   <!-- ==========================================================================
        GLOBAL FLOATING NAVIGATION
        ========================================================================== -->
@@ -4235,6 +4657,48 @@
               <button type="button" class="btn btn-navy magnetic" data-goto="how-it-works">See Our Chain of Custody →</button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- SECTION 04B — CINEMATIC SCROLL-ZOOM PORTAL TRANSITION -->
+      <section class="zoom-portal-section" id="zoom-portal-section" aria-labelledby="zoom-portal-heading">
+        <div class="zoom-portal-sticky">
+          <div class="zoom-portal-flank" aria-hidden="true">
+            <div class="zoom-portal-side-word" id="zp-left-word">
+              <small>ARRIVAL WINDOW</small>
+              Step Into<br/><span class="serif-accent">The City.</span>
+            </div>
+            <div class="zoom-portal-side-word" id="zp-right-word" style="text-align:right;">
+              <small>ZERO WEIGHT</small>
+              Leave The<br/><span class="serif-accent">Wheels Behind.</span>
+            </div>
+          </div>
+
+          <div class="zoom-portal-frame" id="zoom-portal-frame">
+            <img
+              class="zoom-portal-img"
+              id="zoom-portal-img"
+              src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&amp;fit=crop&amp;w=2000&amp;q=85"
+              alt="Golden-hour Parisian boulevard opening into an unburdened travel horizon"
+              loading="lazy"
+              width="2000"
+              height="1333"
+            />
+            <div class="zoom-portal-scrim" aria-hidden="true"></div>
+            <div class="zoom-portal-center-copy" id="zoom-portal-copy">
+              <span class="eyebrow" style="background:rgba(248,247,243,0.14);color:var(--sand);border-color:rgba(233,217,197,0.28);">PORTAL • TERMINAL TO BOULEVARD</span>
+              <h2 id="zoom-portal-heading">Zero Weight. <span class="serif-accent" style="color:var(--sand);">Every Horizon.</span></h2>
+              <p>As your suitcases glide through our sealed NFC corridor, the entire city opens up in front of you.</p>
+            </div>
+          </div>
+
+          <div class="zoom-portal-hud" id="zoom-portal-hud" aria-hidden="true">
+            <span id="zp-hud-label">SCROLL TO ENTER</span>
+            <div class="zoom-portal-bar-track"><div class="zoom-portal-bar-fill" id="zp-bar-fill"></div></div>
+            <span id="zp-hud-pct">0%</span>
+          </div>
+
+          <div class="zoom-portal-veil" id="zoom-portal-veil" aria-hidden="true"></div>
         </div>
       </section>
 
@@ -6447,6 +6911,7 @@
             view.classList.toggle('is-active', view.dataset.route === targetRoute);
           });
           currentRoute = targetRoute;
+          if (typeof syncSingleItemMode === 'function') syncSingleItemMode();
           updateNavIndicators(targetRoute);
           if (!opts.skipHash) {
             history.pushState({ route: targetRoute }, '', `#${targetRoute}`);
@@ -6468,6 +6933,8 @@
           if (opts.scroll) {
             setTimeout(() => smoothScrollTo(opts.scroll), 80);
           } else {
+            window.scrollTo(0, 0);
+            if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
             const activeHeading = document.querySelector(`#page-${targetRoute} h1[tabindex="-1"]`);
             activeHeading?.focus({ preventScroll: true });
           }
@@ -6841,6 +7308,14 @@
       };
 
       const explorerKeys = ['airport', 'storage', 'hotel', 'tracking', 'door'];
+      const explorerAngles = {
+        airport: { rx: 8, ry: -20, sc: 1.0 },
+        storage: { rx: 4, ry: 32, sc: 1.03 },
+        hotel: { rx: -8, ry: -42, sc: 1.02 },
+        tracking: { rx: 14, ry: 155, sc: 1.0 },
+        door: { rx: 10, ry: -68, sc: 1.04 }
+      };
+      let activeExplorerPose = { rx: 8, ry: -20, sc: 1.0, badge: 'TERMINAL MEET' };
       let currentExplorerIdx = 0;
       const expSuitcase = document.getElementById('explorer-suitcase');
       const expInner = document.getElementById('explorer-detail-inner');
@@ -6856,6 +7331,9 @@
         const item = explorerData[key];
         if (!item) return;
         currentExplorerIdx = idx;
+
+        const ang = explorerAngles[key] || { rx: 8, ry: -20, sc: 1.0 };
+        activeExplorerPose = { rx: ang.rx, ry: ang.ry, sc: ang.sc, badge: item.badge };
 
         document.querySelectorAll('.hotspot-btn').forEach((b) => {
           b.setAttribute('aria-selected', String(b.dataset.hotspot === key));
@@ -7831,7 +8309,7 @@
           });
 
           /* 3. Universal Home Section Header Reveal Sequence (Sections 02–14) */
-          document.querySelectorAll('#page-home > section:not(.hero-section)').forEach((sec) => {
+          document.querySelectorAll('#page-home > section:not(.hero-section):not(#zoom-portal-section)').forEach((sec) => {
             const rule = sec.querySelector('.section-reveal-rule');
             const eyebrow = sec.querySelector('.eyebrow');
             const words = sec.querySelectorAll('h2 .word-inner');
@@ -7840,7 +8318,8 @@
             const headTl = gsap.timeline({
               scrollTrigger: {
                 trigger: sec,
-                start: 'top 84%',
+                start: 'top 95%',
+                fastScrollEnd: true,
                 once: true
               }
             });
@@ -7958,6 +8437,80 @@
             clearProps: 'transform',
             scrollTrigger: { trigger: '#freedom-section .freedom-copy-list', start: 'top 84%', once: true }
           });
+
+          /* 5B. Section 04B — Cinematic Scroll-Zoom Portal Transition Into Section 05 */
+          const zoomPortalSec = document.getElementById('zoom-portal-section');
+          const zoomPortalFrame = document.getElementById('zoom-portal-frame');
+          const zoomPortalImg = document.getElementById('zoom-portal-img');
+          const zoomPortalCopy = document.getElementById('zoom-portal-copy');
+          const zoomPortalLeft = document.getElementById('zp-left-word');
+          const zoomPortalRight = document.getElementById('zp-right-word');
+          const zoomPortalVeil = document.getElementById('zoom-portal-veil');
+          const zoomPortalBar = document.getElementById('zp-bar-fill');
+          const zoomPortalPct = document.getElementById('zp-hud-pct');
+          const zoomPortalHud = document.getElementById('zoom-portal-hud');
+          const zoomPortalLbl = document.getElementById('zp-hud-label');
+
+          const applyZoomPortalProgress = (rawP) => {
+            const p = Math.max(0, Math.min(1, rawP));
+            const isMobile = window.innerWidth <= 900;
+            const expandP = Math.min(1, p / 0.62);
+            const easeExp = 1 - Math.pow(1 - expandP, 3);
+
+            const startY = isMobile ? 16 : 21;
+            const startX = isMobile ? 8 : 25;
+            const insetY = (startY * (1 - easeExp)).toFixed(2);
+            const insetX = (startX * (1 - easeExp)).toFixed(2);
+            const rad = ((isMobile ? 28 : 36) * (1 - easeExp)).toFixed(1);
+
+            if (zoomPortalFrame) {
+              zoomPortalFrame.style.clipPath = `inset(${insetY}vh ${insetX}vw ${insetY}vh ${insetX}vw round ${rad}px)`;
+            }
+            if (zoomPortalImg) {
+              const imgScale = (1.24 - p * 0.24 + Math.max(0, p - 0.62) * 0.22).toFixed(3);
+              zoomPortalImg.style.transform = `scale(${imgScale})`;
+            }
+            if (zoomPortalLeft && zoomPortalRight) {
+              const spreadX = (easeExp * 110).toFixed(1);
+              const sideOp = Math.max(0, 1 - easeExp * 1.45).toFixed(3);
+              zoomPortalLeft.style.transform = `translate3d(-${spreadX}px, 0, 0)`;
+              zoomPortalLeft.style.opacity = sideOp;
+              zoomPortalRight.style.transform = `translate3d(${spreadX}px, 0, 0)`;
+              zoomPortalRight.style.opacity = sideOp;
+            }
+            if (zoomPortalCopy) {
+              const enterP = Math.max(0, Math.min(1, (p - 0.30) / 0.26));
+              const exitP = Math.max(0, Math.min(1, (p - 0.74) / 0.20));
+              const copyOp = Math.max(0, enterP * (1 - exitP));
+              const copyY = (1 - enterP) * 28 - exitP * 24;
+              const copyScale = 0.95 + enterP * 0.05 + exitP * 0.04;
+              zoomPortalCopy.style.opacity = copyOp.toFixed(3);
+              zoomPortalCopy.style.transform = `translate3d(0, ${copyY.toFixed(1)}px, 0) scale(${copyScale.toFixed(3)})`;
+            }
+            if (zoomPortalVeil) {
+              const veilP = Math.max(0, Math.min(1, (p - 0.74) / 0.25));
+              zoomPortalVeil.style.opacity = (veilP * veilP).toFixed(3);
+            }
+            if (zoomPortalBar) zoomPortalBar.style.width = `${Math.round(p * 100)}%`;
+            if (zoomPortalPct) zoomPortalPct.textContent = `${Math.round(p * 100)}%`;
+            if (zoomPortalLbl) {
+              zoomPortalLbl.textContent = p < 0.62 ? 'ZOOMING PORTAL' : (p < 0.85 ? 'HORIZON LOCKED' : 'ENTERING CUSTODY');
+            }
+            if (zoomPortalHud) {
+              zoomPortalHud.style.opacity = Math.max(0, 1 - Math.max(0, (p - 0.82) / 0.16)).toFixed(3);
+            }
+          };
+
+          if (zoomPortalSec) {
+            applyZoomPortalProgress(0);
+            ScrollTrigger.create({
+              trigger: zoomPortalSec,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: true,
+              onUpdate: (self) => applyZoomPortalProgress(self.progress)
+            });
+          }
 
           /* 6. Section 05 — How It Works Card Cascade + Scrubbed Route Line */
           if (homeTimelineWrap) {
@@ -8278,6 +8831,222 @@
         ambientPaused = !ambientPaused;
         syncAmbientMotion();
       });
+
+      /* ======================================================================
+         18. PERSISTENT SINGLE-ITEM SCROLL-PARALLAX LUGGAGE CONTROLLER
+         ====================================================================== */
+      const masterTrack = document.getElementById('master-suitcase-track');
+      const masterRig = document.getElementById('master-suitcase-rig');
+      const masterXray = document.getElementById('master-xray-overlay');
+      const masterBadgeKicker = document.getElementById('master-badge-kicker');
+      const masterBadgeTitle = document.getElementById('master-badge-title');
+      const masterBadgeStatus = document.getElementById('master-badge-status');
+      const chapterRailBtns = [...document.querySelectorAll('#scroll-chapter-rail .chapter-dot-btn')];
+      const explorerStageEl = document.querySelector('.explorer-stage');
+
+      let singleItemActive = false;
+      function syncSingleItemMode() {
+        singleItemActive = currentRoute === 'home' && window.innerWidth >= 1024 && !prefersReducedMotion;
+        document.body.classList.toggle('single-item-scroll-active', singleItemActive);
+      }
+
+      chapterRailBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.chapterTarget;
+          if (target) {
+            smoothScrollTo(target);
+            if (hasScrollTrigger) {
+              setTimeout(() => ScrollTrigger.refresh(), 500);
+            }
+          }
+        });
+      });
+
+      if (masterTrack && masterRig && !prefersReducedMotion) {
+        let ptrNormX = 0;
+        let ptrNormY = 0;
+        if (finePointer) {
+          window.addEventListener('pointermove', (e) => {
+            if (!singleItemActive) return;
+            ptrNormX = (e.clientX / Math.max(1, window.innerWidth) - 0.5) * 2;
+            ptrNormY = (e.clientY / Math.max(1, window.innerHeight) - 0.5) * 2;
+            masterRig.style.setProperty('--glare-x', `${(50 + ptrNormX * 34).toFixed(1)}%`);
+            masterRig.style.setProperty('--glare-y', `${(35 + ptrNormY * 28).toFixed(1)}%`);
+          }, { passive: true });
+        }
+
+        const getDocY = (el) => {
+          if (!el) return 0;
+          const r = el.getBoundingClientRect();
+          return r.top + window.scrollY;
+        };
+
+        const getDockCoords = (el) => {
+          if (!el) return { x: 0, y: 0 };
+          const r = el.getBoundingClientRect();
+          return {
+            x: (r.left + r.width * 0.5) - window.innerWidth * 0.5,
+            y: (r.top + r.height * 0.5) - window.innerHeight * 0.5
+          };
+        };
+
+        const smoothstep = (t) => {
+          const c = Math.max(0, Math.min(1, t));
+          return c * c * (3 - 2 * c);
+        };
+        const mix = (a, b, t) => a + (b - a) * t;
+
+        const secEls = {
+          hero: document.querySelector('.hero-section'),
+          booking: document.getElementById('quick-booking-section'),
+          services: document.getElementById('services-heading')?.closest('section'),
+          freedom: document.getElementById('freedom-section'),
+          portal: document.getElementById('zoom-portal-section'),
+          how: document.getElementById('home-how-section'),
+          explorer: document.getElementById('explorer-section'),
+          dest: document.getElementById('dest-cylinder-section'),
+          tracking: document.getElementById('tracking-section'),
+          why: document.getElementById('why-section'),
+          pricing: document.getElementById('pricing-home-heading')?.closest('section'),
+          faq: document.getElementById('faq-section'),
+          cta: document.getElementById('final-cta-banner')
+        };
+
+        const buildWaypoints = () => {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const heroDock = getDockCoords(heroStage);
+          const expDock = getDockCoords(explorerStageEl);
+
+          const yBook = Math.max(vh * 0.85, getDocY(secEls.booking) - vh * 0.18);
+          const ySrv = Math.max(yBook + 200, getDocY(secEls.services) + (secEls.services?.offsetHeight || 600) * 0.28 - vh * 0.35);
+          const yFree = Math.max(ySrv + 200, getDocY(secEls.freedom) + (secEls.freedom?.offsetHeight || 600) * 0.35 - vh * 0.4);
+          const yPortalStart = Math.max(yFree + 200, getDocY(secEls.portal) - vh * 0.05);
+          const yPortalEnd = Math.max(yPortalStart + 400, getDocY(secEls.portal) + Math.max(vh, (secEls.portal?.offsetHeight || 1600) - vh));
+          const yHowStart = Math.max(yPortalEnd + 160, getDocY(secEls.how) - vh * 0.15);
+          const yHowEnd = Math.max(yHowStart + 260, getDocY(secEls.how) + (secEls.how?.offsetHeight || 500) * 0.65 - vh * 0.35);
+          const yExpTop = Math.max(yHowEnd + 200, getDocY(secEls.explorer) + (secEls.explorer?.offsetHeight || 700) * 0.32 - vh * 0.42);
+          const yExpHold = yExpTop + 260;
+          const yDest = Math.max(yExpHold + 200, getDocY(secEls.dest) + (secEls.dest?.offsetHeight || 700) * 0.38 - vh * 0.45);
+          const yTrkStart = Math.max(yDest + 200, getDocY(secEls.tracking) + vh * 0.15);
+          const yTrkEnd = Math.max(yTrkStart + 400, getDocY(secEls.tracking) + Math.max(vh, (secEls.tracking?.offsetHeight || 1600) - vh * 0.85));
+          const yWhy = Math.max(yTrkEnd + 200, getDocY(secEls.why) + (secEls.why?.offsetHeight || 700) * 0.36 - vh * 0.45);
+          const yPrc = Math.max(yWhy + 200, getDocY(secEls.pricing) - vh * 0.15);
+          const yFaq = Math.max(yPrc + 200, getDocY(secEls.faq) + (secEls.faq?.offsetHeight || 600) * 0.4 - vh * 0.4);
+          const yCta = Math.max(yFaq + 200, getDocY(secEls.cta) + (secEls.cta?.offsetHeight || 420) * 0.42 - vh * 0.52);
+
+          return [
+            { s: 0, x: heroDock.x, y: heroDock.y, sc: 0.88, op: 1.0, rx: 6, ry: -22, rz: 0, hY: 0, xr: 0, tilt: 1, ch: 0, k: 'PRIORITY BAG', t: 'HND • GINZA', st: 'SEALED' },
+            { s: yBook, x: vw * 0.40, y: -vh * 0.02, sc: 0.56, op: 0.14, rx: 8, ry: -58, rz: 4, hY: 28, xr: 0, tilt: 0.25, ch: 1, k: 'RESERVATION', t: 'BOOKING OPEN', st: 'READY' },
+            { s: ySrv, x: vw * 0.41, y: vh * 0.04, sc: 0.74, op: 0.88, rx: 4, ry: -84, rz: -3, hY: 8, xr: 0, tilt: 0.4, ch: 2, k: 'CONCIERGE', t: 'DOOR-TO-DOOR', st: 'LOCKED' },
+            { s: yFree, x: vw * 0.44, y: -vh * 0.18, sc: 0.52, op: 0.14, rx: -6, ry: -32, rz: 12, hY: 32, xr: 0, tilt: 0.15, ch: 2, k: 'HANDS-FREE', t: 'CARRY LESS', st: 'DISPATCHED' },
+            { s: yPortalStart, x: vw * 0.46, y: -vh * 0.25, sc: 0.44, op: 0.0, rx: -4, ry: -20, rz: 6, hY: 32, xr: 0, tilt: 0, ch: 8, k: 'PORTAL', t: 'CITY HORIZON', st: 'ZOOM' },
+            { s: yPortalEnd, x: -vw * 0.42, y: vh * 0.08, sc: 0.48, op: 0.0, rx: 4, ry: -24, rz: -4, hY: 20, xr: 0, tilt: 0, ch: 8, k: 'PORTAL', t: 'CITY HORIZON', st: 'ZOOM' },
+            { s: yHowStart, x: -vw * 0.36, y: vh * 0.08, sc: 0.66, op: 0.32, rx: 5, ry: -26, rz: -4, hY: 4, xr: 0, tilt: 0.25, ch: 3, k: '4-STEP ROUTE', t: 'TERMINAL MEET', st: 'VERIFIED' },
+            { s: yHowEnd, x: vw * 0.36, y: vh * 0.08, sc: 0.66, op: 0.32, rx: 5, ry: 28, rz: 4, hY: 4, xr: 0, tilt: 0.25, ch: 3, k: '4-STEP ROUTE', t: 'BELL DESK', st: 'VERIFIED' },
+            { s: yExpTop, x: expDock.x, y: expDock.y, sc: 0.78 * activeExplorerPose.sc, op: 1.0, rx: activeExplorerPose.rx, ry: activeExplorerPose.ry, rz: 0, hY: 0, xr: 0, tilt: 0.3, ch: 4, k: 'PROTOCOL', t: activeExplorerPose.badge, st: 'ACTIVE' },
+            { s: yExpHold, x: expDock.x, y: expDock.y, sc: 0.78 * activeExplorerPose.sc, op: 1.0, rx: activeExplorerPose.rx, ry: activeExplorerPose.ry, rz: 0, hY: 0, xr: 0, tilt: 0.3, ch: 4, k: 'PROTOCOL', t: activeExplorerPose.badge, st: 'ACTIVE' },
+            { s: yDest, x: vw * 0.42, y: -vh * 0.22, sc: 0.50, op: 0.10, rx: 6, ry: 42, rz: 8, hY: 28, xr: 0, tilt: 0.15, ch: 4, k: 'CORRIDORS', t: '8 GLOBAL HUBS', st: 'LIVE' },
+            { s: yTrkStart, x: vw * 0.40, y: -vh * 0.23, sc: 0.56, op: 0.88, rx: 12, ry: 158, rz: -2, hY: 16, xr: 0, tilt: 0.25, ch: 5, k: 'GPS + NFC', t: 'LIVE BEACON', st: 'TRACKING' },
+            { s: yTrkEnd, x: vw * 0.40, y: -vh * 0.23, sc: 0.56, op: 0.88, rx: 14, ry: 174, rz: 2, hY: 16, xr: 0, tilt: 0.25, ch: 5, k: 'GPS + NFC', t: 'LIVE BEACON', st: 'TRACKING' },
+            { s: yWhy, x: vw * 0.34, y: -vh * 0.28, sc: 0.50, op: 0.94, rx: 4, ry: -16, rz: -2, hY: 0, xr: 1, tilt: 0.35, ch: 6, k: 'CUSTODY', t: 'X-RAY SCAN', st: 'ARMED' },
+            { s: yPrc, x: vw * 0.44, y: vh * 0.04, sc: 0.50, op: 0.08, rx: 4, ry: -28, rz: 6, hY: 30, xr: 0, tilt: 0.1, ch: 6, k: 'FLAT RATES', t: 'FROM $14', st: 'INSURED' },
+            { s: yFaq, x: vw * 0.44, y: vh * 0.04, sc: 0.50, op: 0.08, rx: 4, ry: -28, rz: 6, hY: 30, xr: 0, tilt: 0.1, ch: 6, k: 'CONCIERGE', t: '24/7 DESK', st: 'ONLINE' },
+            { s: yCta, x: vw * 0.31, y: 0, sc: 0.82, op: 0.94, rx: 6, ry: -24, rz: -3, hY: 0, xr: 0, tilt: 0.55, ch: 7, k: 'TAKEOFF', t: 'READY TO FLY', st: 'VIP' }
+          ];
+        };
+
+        const cur = { x: 0, y: 0, sc: 1, op: 1, rx: 6, ry: -22, rz: 0, hY: 0, xr: 0 };
+        let initializedMaster = false;
+        let lastChapterIdx = -1;
+        let lastBadgeKey = '';
+
+        const tickMasterSuitcase = () => {
+          if (singleItemActive) {
+            const wps = buildWaypoints();
+            const sy = window.scrollY;
+            let a = wps[0];
+            let b = wps[wps.length - 1];
+            let localT = 0;
+
+            if (sy <= wps[0].s) {
+              a = b = wps[0];
+              localT = 0;
+            } else if (sy >= wps[wps.length - 1].s) {
+              a = b = wps[wps.length - 1];
+              localT = 1;
+            } else {
+              for (let i = 0; i < wps.length - 1; i++) {
+                if (sy >= wps[i].s && sy <= wps[i + 1].s) {
+                  a = wps[i];
+                  b = wps[i + 1];
+                  const span = Math.max(1, b.s - a.s);
+                  localT = smoothstep((sy - a.s) / span);
+                  break;
+                }
+              }
+            }
+
+            const tiltAmt = mix(a.tilt, b.tilt, localT);
+            const mouseRx = ambientPaused ? 0 : (-ptrNormY * 10 * tiltAmt);
+            const mouseRy = ambientPaused ? 0 : (ptrNormX * 16 * tiltAmt);
+
+            const tgt = {
+              x: mix(a.x, b.x, localT),
+              y: mix(a.y, b.y, localT),
+              sc: mix(a.sc, b.sc, localT),
+              op: mix(a.op, b.op, localT),
+              rx: mix(a.rx, b.rx, localT) + mouseRx,
+              ry: mix(a.ry, b.ry, localT) + mouseRy,
+              rz: mix(a.rz, b.rz, localT),
+              hY: mix(a.hY, b.hY, localT),
+              xr: mix(a.xr, b.xr, localT)
+            };
+
+            const ease = initializedMaster ? 0.14 : 1;
+            initializedMaster = true;
+            cur.x += (tgt.x - cur.x) * ease;
+            cur.y += (tgt.y - cur.y) * ease;
+            cur.sc += (tgt.sc - cur.sc) * ease;
+            cur.op += (tgt.op - cur.op) * ease;
+            cur.rx += (tgt.rx - cur.rx) * ease;
+            cur.ry += (tgt.ry - cur.ry) * ease;
+            cur.rz += (tgt.rz - cur.rz) * ease;
+            cur.hY += (tgt.hY - cur.hY) * ease;
+            cur.xr += (tgt.xr - cur.xr) * ease;
+
+            masterTrack.style.transform = `translate3d(${cur.x.toFixed(1)}px, ${cur.y.toFixed(1)}px, 0) scale(${cur.sc.toFixed(3)})`;
+            masterTrack.style.opacity = cur.op.toFixed(3);
+            masterRig.style.transform = `rotateX(${cur.rx.toFixed(2)}deg) rotateY(${cur.ry.toFixed(2)}deg) rotateZ(${cur.rz.toFixed(2)}deg)`;
+            masterRig.style.setProperty('--handle-y', `${cur.hY.toFixed(1)}px`);
+            if (masterXray) {
+              masterXray.style.setProperty('--xray-alpha', cur.xr.toFixed(3));
+            }
+
+            const activeWp = localT < 0.5 ? a : b;
+            if (activeWp.ch !== lastChapterIdx) {
+              lastChapterIdx = activeWp.ch;
+              chapterRailBtns.forEach((btn) => {
+                btn.classList.toggle('is-active', Number(btn.dataset.chapterIdx) === lastChapterIdx);
+              });
+            }
+            const badgeKey = `${activeWp.k}|${activeWp.t}|${activeWp.st}`;
+            if (badgeKey !== lastBadgeKey) {
+              lastBadgeKey = badgeKey;
+              if (masterBadgeKicker) masterBadgeKicker.textContent = activeWp.k;
+              if (masterBadgeTitle) masterBadgeTitle.textContent = activeWp.t;
+              if (masterBadgeStatus) masterBadgeStatus.textContent = activeWp.st;
+            }
+          }
+          requestAnimationFrame(tickMasterSuitcase);
+        };
+
+        window.addEventListener('resize', syncSingleItemMode, { passive: true });
+        syncSingleItemMode();
+        requestAnimationFrame(tickMasterSuitcase);
+      } else {
+        syncSingleItemMode();
+      }
 
       /* Initial URL Hash Route Check */
       const initialHash = window.location.hash.replace('#', '');
